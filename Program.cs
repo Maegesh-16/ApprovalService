@@ -94,13 +94,15 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+// CORS must be first in the pipeline
+app.UseCors("AllowFrontend");
+
 // Enable Swagger for all environments (useful for API testing)
 app.UseSwagger();
 app.UseSwaggerUI();
 
 // HTTPS redirection disabled for Render deployment (Render handles HTTPS at load balancer)
 // app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
 app.UseAuthorization();
 
 app.MapControllers();
